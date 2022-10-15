@@ -1,0 +1,266 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Template Mo">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+  <title>USER registration</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{%static 'bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="{%static 'css/fontawesome.css'%}">
+  <link rel="stylesheet" href="{%static 'css/templatemo-edu-meeting.css'%}">
+  <link rel="stylesheet" href="{%static 'css/owl.css'%}">
+  <link rel="stylesheet" href="{%static 'css/lightbox.css'%}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
+  <link href="{%static 'css/loginStyle.css'%}" rel="stylesheet" type="text/css">
+  <!--<link href="/style.css" rel="stylesheet" type="text/css"> -->
+  <!--
+
+TemplateMo 569 Edu Meeting
+
+https://templatemo.com/tm-569-edu-meeting
+
+-->
+  <script type="text/javascript">
+    async function registerAction(val) {
+      var name = document.getElementById("name").value
+      var pass = document.getElementById("pass").value
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value
+      var dob = document.getElementById("dob").value
+      var radios = document.getElementsByName("gender")
+      var course =document.getElementById("course").value
+      var gend =0 ;
+      for (var radio of radios) {
+        if (radio.checked) {
+          gend = 1
+        }
+      };
+
+      if(name==''||pass==""||email==""||phone==""||dob==""||gend==0||course==""){
+        window.alert("enter all data")
+        return false
+      }else{
+        return true
+
+      }
+    }
+
+  </script>
+
+</head>
+
+<body>
+
+
+
+  <!-- Sub Header 
+  
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="index.html" class="logo">
+              ALUMNAS
+            </a>
+            <!-- ***** Logo End ***** -->
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+              <li><a href="{% url 'index' %}">Home</a></li>
+              <li><a href="{% url 'login' %}">Login</a></li>
+            </ul>
+
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+
+  <section class="meetings-page" id="meetings">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="login">
+                <h1>REGISTER</h1>
+                <form onsubmit="return registerAction(this)" method="post" target="_self">
+                  {% csrf_token %}
+                  <label for="name">
+                    <!-- font awesome icon -->
+                    <i class="fas fa-user"></i>
+                  </label>
+                  <input type="text" placeholder="name" name="name" id="name" required>
+                  <label for="dob">
+                    <i class="fas fa-calendar"></i>
+                  </label>
+                  <input type="date" name="dob" placeholder="dob" id="dob" required>
+                  <!-- <label for="age">
+                    <i class="fa-brands fa-magento"></i>
+                  </label>
+                  <input type="number" name="age" placeholder="age" id="age" required> -->
+                  <!-- <label for="gender">
+                    <i class="fas fa-user"></i>
+                  </label> -->
+                  <!-- <label for="gender">
+                    <i class="fas fa-user"></i>
+                  </label>
+                  <input type="radio" name="gender" id="male" value="male" size="5">
+                  <label for="female">male</label>
+                  <input type="radio" name="gender" id="female" value="female" size="5">
+                  <label for="female">female</label>
+                  <input type="radio" name="gender" id="other" value="other" size="5">
+                  <label for="other">other</label> -->
+
+                  <label for="phone">
+                    <i class="fas fa-phone"></i>
+                  </label>
+                  <input type="text" name="phone" placeholder="phone" id="phone" required>
+                  <label for="course">
+                    <i class="fa-brands fa-discourse"></i>
+                  </label>
+                  <select id="course" name="course">
+                    <option value="COURSE" selected>COURSE</option>
+                    <option value="BTECH">BTECH</option>
+                    <option value="MBA">MBA</option>
+                    <option value="MCA">MCA</option>
+                  </select>
+                  <select id="role" name="role">
+                    <option value="STUDENT" selected>STUDENT</option>
+                    <option value="ALUMNI">ALUMNI</option>
+                    
+                  </select>
+                  <label for="email">
+                    <i class="fa-solid fa-at"></i>
+                  </label>
+                  <input type="email" placeholder="email" name="email" id="email" required>
+                  <label for="password">
+                    <i class="fas fa-lock"></i>
+                  </label>
+                  <input type="password" name="pass" placeholder="password" id="pass" required>
+                  <label for="retype password">
+                    <i class="fas fa-lock"></i>
+                  </label>
+                  <input type="password" name="repass" placeholder="retype password" id="repass" required>
+                  <!-- <label for="usertype">
+                    <i class="fa-regular fa-user"></i>
+                  </label>
+                  <input type="text" name="usertype" placeholder="usertype" id="usertype" required> -->
+                  <label for="gender">
+                    <i class="fas fa-user"></i>
+                  </label>
+                  <!-- <label for="gender">
+                    <i class="fas fa-user"></i>
+                  </label> -->
+
+                  <input type="radio" name="gender" id="male" value="male" style="height:30px; width:40px">
+                  <label for="female">male</label>
+                  <input type="radio" name="gender" id="female" value="female" style="height:30px; width:40px">
+                  <label for="female">female</label>
+                  <input type="radio" name="gender" id="other" value="other" style="height:30px; width:40px">
+                  <label for="other">other</label>
+                  <input type="submit" value="REGISTER">
+                </form>
+              </div>
+              <div class="filters">
+
+              </div>
+            </div>
+
+
+
+
+            <div class="footer">
+              <!-- <p>Copyright © 2022 SNGIST,All Rights Reserved. 
+          <br>Design: <a href="https://templatemo.com/page/1" target="_parent" title="website templates">TemplateMo</a></p> -->
+            </div>
+  </section>
+
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{%static 'jquery/jquery.min.js'%}"></script>
+  <script src="{%static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+  <script src="{%static 'js/isotope.min.js'%}"></script>
+  <script src="{%static 'js/owl-carousel.js'%}"></script>
+  <script src="{%static 'js/lightbox.js'%}"></script>
+  <script src="{%static 'js/tabs.js'%}"></script>
+  
+  <script src="{%static 'js/video.js'%}"></script>
+  <script src="{%static 'js/slick-slider.js'%}"></script>
+  <script type="text/javascript" src="{%static 'js/custom.js'%}"></script>
+  <script src="{%static 'js/main.js'%}"></script>
+
+  <script src=""></script>
+
+
+
+  <script>
+    //according to loftblog tut
+    $('.nav li:first').addClass('active');
+
+    var showSection = function showSection(section, isAnimate) {
+      var
+        direction = section.replace(/#/, ''),
+        reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+        reqSectionPos = reqSection.offset().top - 0;
+
+      if (isAnimate) {
+        $('body, html').animate({
+          scrollTop: reqSectionPos
+        },
+          800);
+      } else {
+        $('body, html').scrollTop(reqSectionPos);
+      }
+
+    };
+
+    var checkSection = function checkSection() {
+      $('.section').each(function () {
+        var
+          $this = $(this),
+          topEdge = $this.offset().top - 80,
+          bottomEdge = topEdge + $this.height(),
+          wScroll = $(window).scrollTop();
+        if (topEdge < wScroll && bottomEdge > wScroll) {
+          var
+            currentId = $this.data('section'),
+            reqLink = $('a').filter('[href*=\\#' + currentId + ']');
+          reqLink.closest('li').addClass('active').
+            siblings().removeClass('active');
+        }
+      });
+    };
+
+    $('.main-menu, .responsive-menu, .scroll-to-section').on('click', 'a', function (e) {
+      e.preventDefault();
+      showSection($(this).attr('href'), true);
+    });
+
+    $(window).scroll(function () {
+      checkSection();
+    });
+  </script>
+</body>
+
+</html>

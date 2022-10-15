@@ -1,0 +1,201 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Template Mo">
+  <!-- <meta http-equiv="cache-control" content="max-age=0" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="pragma" content="no-cache"> -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+  <title>LOGIN PAGE</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{%static 'bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="{%static 'css/fontawesome.css'%}">
+  <link rel="stylesheet" href="{%static 'css/templatemo-edu-meeting.css'%}">
+  <link rel="stylesheet" href="{%static 'css/owl.css'%}">
+  <link rel="stylesheet" href="{%static 'css/lightbox.css'%}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
+  <link href="{%static 'css/loginStyle.css'%}" rel="stylesheet" type="text/css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <!--
+
+TemplateMo 569 Edu Meeting
+
+https://templatemo.com/tm-569-edu-meeting
+
+-->
+  <script type="text/javascript">
+    async function loginAction(val) {
+      var usr = document.getElementById("username").value;
+      var pass = document.getElementById("password").value;
+      // alert(usr + "::" + pass);
+      if(usr==''||pass==''){
+        window.alert("please fill username and password")
+        return false
+      }else{
+        return true
+      }
+
+    }
+  </script>
+</head>
+
+<body>
+
+
+
+  <!-- Sub Header -->
+
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="{% url 'index' %}" class="logo">
+              ALUMNAS
+            </a>
+            <!-- ***** Logo End ***** -->
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+
+
+              <li><a href="{% url 'index' %}">Home</a></li>
+              <li><a href="{% url 'register'%}">REGISTER</a></li>
+            </ul>
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+
+
+  <section class="meetings-page" id="meetings">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="login">
+                <h1>Login</h1>
+                <form onsubmit="return loginAction()" method="post">
+                  {% csrf_token %}
+                  <label for="username">
+                    <!-- font awesome icon -->
+                    <i class="fas fa-user"></i>
+                  </label>
+                  <input type="text" name="username" placeholder="Username" id="username" required>
+                  <label for="password">
+                    <i class="fas fa-lock"></i>
+                  </label>
+                  <input type="password" name="password" placeholder="Password" id="password" required>
+                  <span class="psw">Forgot <a href="#">password?</a></span>
+                  <div class="btn-group">
+                    <input type="button" value="cancel">
+                    &nbsp;
+                    <input type="submit" value="login">
+                  </div>
+                  <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
+
+                </form>
+              </div>
+
+              <div class="filters">
+
+              </div>
+            </div>
+
+            <div class="footer">
+              <!-- <p>Copyright © 2022 SNGIST,All Rights Reserved.
+                <br>Design: <a href="https://templatemo.com/page/1" target="_parent"
+                  title="website templates">TemplateMo</a>
+              </p> -->
+            </div>
+  </section>
+
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{%static 'jquery/jquery.min.js'%}"></script>
+  <script src="{%static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+  <script src="{%static 'js/isotope.min.js'%}"></script>
+  <script src="{%static 'js/owl-carousel.js'%}"></script>
+  <script src="{%static 'js/lightbox.js'%}"></script>
+  <script src="{%static 'js/tabs.js'%}"></script>
+  
+  <script src="{%static 'js/video.js'%}"></script>
+  <script src="{%static 'js/slick-slider.js'%}"></script>
+  <script type="text/javascript" src="{%static 'js/custom.js'%}"></script>
+  <script src="{%static 'js/main.js'%}"></script>
+  <script>
+    //according to loftblog tut
+    $('.nav li:first').addClass('active');
+
+    var showSection = function showSection(section, isAnimate) {
+      var
+        direction = section.replace(/#/, ''),
+        reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+        reqSectionPos = reqSection.offset().top - 0;
+
+      if (isAnimate) {
+        $('body, html').animate({
+          scrollTop: reqSectionPos
+        },
+          800);
+      } else {
+        $('body, html').scrollTop(reqSectionPos);
+      }
+
+    };
+
+    var checkSection = function checkSection() {
+      $('.section').each(function () {
+        var
+          $this = $(this),
+          topEdge = $this.offset().top - 80,
+          bottomEdge = topEdge + $this.height(),
+          wScroll = $(window).scrollTop();
+        if (topEdge < wScroll && bottomEdge > wScroll) {
+          var
+            currentId = $this.data('section'),
+            reqLink = $('a').filter('[href*=\\#' + currentId + ']');
+          reqLink.closest('li').addClass('active').
+            siblings().removeClass('active');
+        }
+      });
+    };
+
+    $('.main-menu, .responsive-menu, .scroll-to-section').on('click', 'a', function (e) {
+      e.preventDefault();
+      showSection($(this).attr('href'), true);
+    });
+
+    $(window).scroll(function () {
+      checkSection();
+    });
+  </script>
+</body>
+
+
+</body>
+
+</html>
