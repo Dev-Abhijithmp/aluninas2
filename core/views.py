@@ -19,7 +19,11 @@ def index(request):
         print(request.user.is_staff)
         return redirect('home')
     else:
-        return render(request,'index.html')
+        events = Event.objects.all()
+        context={
+            'event':events
+        }
+        return render(request,'index.html',context)
 def login(request):
     if request.method == 'POST':
         email = request.POST['username']

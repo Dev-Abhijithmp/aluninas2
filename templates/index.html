@@ -98,42 +98,25 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="row">
         <div class="col-lg-12">
           <div class="owl-service-item owl-carousel">
+            {% for i in  event%}
 
             <div class="item">
               <div class="icon">
                 <img src="{%static 'images/service-icon-01.png'%}" alt="">
               </div>
               <div class="down-content">
-                <h4>YOUTH FESTIVAL</h4>
-                <p>VENUE : COLLEGE AUDITORIUM</p>
-                <P>DATE : 22-07-2022 TIME : 11:00 AM</P>
+                <h4>{{i.name}}</h4>
+                <p>VENUE : {{i.venue}}</p>
+                <P>DATE : {{i.date}} : {{i.eventtime}}</P>
                 <P>ALL STUDENTS CAN PARTICIPATE </P>
-                <input type="submit" value="PARTICIPATE">
+                
               </div>
             </div>
+            {% endfor %}
 
-            <div class="item">
-              <div class="icon">
-                <img src="{%static 'images/service-icon-02.png'%}" alt="">
-              </div>
-              <div class="down-content">
-                <h4>ALUMNI MEET</h4>
-                <p>VENUE : ST.XAVIER'S BLOCK</p>
-                <P>DATE :30-07-2022 TIME : 3:00 PM</P>
-                <P>ALL STUDENTS ARE INVITED </P>
-                <input type="submit" value="PARTICIPATE">
-              </div>
-            </div>
+            
 
-            <div class="item">
-              <div class="icon">
-                <img src="{%static 'images/service-icon-03.png'%}" alt="">
-              </div>
-              <div class="down-content">
-                <h4>SPORT DAY</h4>
-                <p>ALL STUDENTS CAN PARTICIPATE</p>
-              </div>
-            </div>
+            
 
 
 
@@ -142,8 +125,10 @@ https://templatemo.com/tm-569-edu-meeting
       </div>
     </div>
   </section>
+  <br>
+  <br>
 
-  <section class="upcoming-meetings" id="meetings">
+  {% comment %} <section class="upcoming-meetings" id="meetings">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -226,7 +211,7 @@ https://templatemo.com/tm-569-edu-meeting
         </div>
       </div>
     </div>
-  </section>
+  </section> {% endcomment %}
 
   <section class="apply-now" id="apply">
     <div class="container">
