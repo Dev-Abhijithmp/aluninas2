@@ -10,7 +10,7 @@
   <meta name="author" content="Template Mo">
   <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
-  <title>HOME-USER</title>
+  <title>jobs</title>
 
   <!-- Bootstrap core CSS -->
   <link href="{%static 'bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
@@ -19,10 +19,11 @@
   <!-- Additional CSS Files -->
   <link rel="stylesheet" href="{%static 'css/fontawesome.css'%}">
   <link rel="stylesheet" href="{%static 'css/templatemo-edu-meeting.css'%}">
-  <link rel="stylesheet" href="{%static 'css/owl.css'%}">
-  <link rel="stylesheet" href="{%static 'css/lightbox.css'%}">
+  <link rel="stylesheet" "{%static 'css/owl.css'%}">
+  <link rel="stylesheet" "{%static 'css/lightbox.css'%}">
+  <!-- <link href="/style.css" rel="stylesheet" type="text/css"> -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
-
+  <link href="{%static 'css/loginStyle.css'%}" rel="stylesheet" type="text/css">
   <!--
 
 TemplateMo 569 Edu Meeting
@@ -30,72 +31,74 @@ TemplateMo 569 Edu Meeting
 https://templatemo.com/tm-569-edu-meeting
 
 -->
+ 
 </head>
 
-<body >
+<body>
   <!-- Sub Header!-->
 
   <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <nav class="main-nav">
-            <!-- ***** Logo Start ***** -->
 
-            <!-- ***** Logo End ***** -->
-            <!-- ***** Menu Start ***** -->
-            <ul class="nav">
-              <li><a href="index.html" >LOGOUT</a></li>
-            </ul>
-            <!-- <a class='menu-trigger'>
-                          <span>Menu</span>
-                      </a>
+  <!-- ***** Logo Start ***** -->
+
+
+  <!-- ***** Logo End ***** -->
+  <!-- ***** Menu Start ***** 
+                       
+                     
                       <!-- ***** Menu End ***** -->
-          </nav>
-        </div>
-      </div>
-    </div>
-  </header>
+
   <!-- ***** Header Area End ***** -->
+
+
 
   <section class="meetings-page" id="meetings">
     <div class="container">
-      <!-- <ul class="nav"> -->
-
-      <div class="sidenav">
-        <ul>
-          <li><a href="{%url 'home'%}"><i class="fa-solid fa-house-user"></i>Home</a></li>
-          <li><a class="active"href="{%url 'profile'%}"><i class="fa-solid fa-user"></i>PROFILE</a></li>
-          <li><a href="{%url 'event'%}"><i class="fa-solid fa-calendar"></i>EVENTS</a></li>
-          <li><a href="{%url 'job'%}"><i class="fa-solid fa-user-tie"></i>JOBS</a></li>
-          
-        </ul>
-      </div>
+      <ul class="nav">
+        <div class="sidenav">
+          <ul>
+            <li><a href="{%url 'staffhome'%}"><i class="fa-solid fa-house-user"></i> Home</a></li>
+            <li><a href="{%url 'staffprofile'%}" class="active"><i class="fa-solid fa-user"></i> PROFILE</a></li>
+            <li><a href="{%url 'staffevent'%}"><i class="fa-solid fa-calendar"></i>EVENTS</a></li>
+            <li><a href="{%url 'staffjob'%}"><i class="fa-solid fa-user-tie"></i>JOBS</a></li>
+          </ul>
+        </div>
+      </ul>
       <div class="row">
         <div class="col-lg-12">
           <div class="row">
             <div class="col-lg-12">
               <div class="filters">
-                <li id="name">welcome user</li>
-                 <ul>
-                  <li data-filter="*"  class="active">All events</li>
-                  <li data-filter=".soon">Soon</li>
-                  <li data-filter=".imp">Important</li>
-                  <li data-filter=".att">Attractive</li>
-                </ul> 
+                <div class="login">
+                  <h1>JOB</h1>
+                  <form onsubmit="return jobAction(this)" method="post">
+                    <label for="job post">
+                      <i class="fa-solid fa-user-tie"></i>
+                    </label>
+                    <input type="text" placeholder="jobpost" name="jobname" id="jobpost" required>
+                    <label for="job description">
+                      <i class="fa-sharp fa-solid fa-j"></i>
+                    </label>
+                    <input type="text" placeholder="jobdescription" name="jobdescription" id="jobdescription"
+                      required><br><br>
+                    <input type="submit" value="submit">
+                  </form>
+                  <br>
+                </div>
+
               </div>
-              <br><br><br><br><br><br><br>
+
             </div>
-          </div>
-          <div class="footer">
-            <p>last login date and time</p>
+            <div class="footer">
+              <!-- <p>last login date and time</p> -->
+            </div>
           </div>
         </div>
       </div>
     </div>
-
   </section>
+
+
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
   <script src="{%static 'jquery/jquery.min.js'%}"></script>
@@ -105,11 +108,26 @@ https://templatemo.com/tm-569-edu-meeting
   <script src="{%static 'js/owl-carousel.js'%}"></script>
   <script src="{%static 'js/lightbox.js'%}"></script>
   <script src="{%static 'js/tabs.js'%}"></script>
-  
+  <script src="{%static 'js/isotope.js'%}"></script>
   <script src="{%static 'js/video.js'%}"></script>
   <script src="{%static 'js/slick-slider.js'%}"></script>
-  <script type="text/javascript" src="{%static 'js/custom.js'%}"></script>
-  <script src="{%static 'js/main.js'%}"></script>
+  <script src="{%static 'js/custom.js'%}"></script>
+
+   <script type="text/javascript">
+    async function jobAction() {
+
+      var post = document.getElementById("jobpost").value;
+      var description = document.getElementById("jobdescription").value;
+      //alert(post + "::" + description);
+     if(post==""||description==""){
+      window.alert('please fill all the data')
+      return false
+     }else{
+      return true
+     }
+      
+    }
+  </script> 
   <script>
     //according to loftblog tut
     $('.nav li:first').addClass('active');
@@ -157,9 +175,6 @@ https://templatemo.com/tm-569-edu-meeting
       checkSection();
     });
   </script>
-</body>
-
-
 </body>
 
 </html>

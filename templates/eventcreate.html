@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,17 +13,18 @@
   <title>Event</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{%static 'bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
 
 
   <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="assets/css/fontawesome.css">
-  <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css">
-  <link rel="stylesheet" href="assets/css/owl.css">
-  <link rel="stylesheet" href="assets/css/lightbox.css">
+  <link rel="stylesheet" href="{%static 'css/fontawesome.css'%}">
+  <link rel="stylesheet" href="{%static 'css/templatemo-edu-meeting.css'%}">
+  <link rel="stylesheet" href="{%static 'css/owl.css'%}">
+  <link rel="stylesheet" href="{%static 'css/lightbox.css'%}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
   <link href="/style.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
-  <link href="assets/css/loginStyle.css" rel="stylesheet" type="text/css">
+  <link href="{%static 'css/loginStyle.css'%}" rel="stylesheet" type="text/css">
   <!--
 
 TemplateMo 569 Edu Meeting
@@ -56,10 +58,10 @@ https://templatemo.com/tm-569-edu-meeting
       <ul class="nav">
         <div class="sidenav">
           <ul>
-            <li><a href="home.html"><i class="fa-solid fa-house-user"></i> Home</a></li>
-            <li><a href="profile.html" class="active"><i class="fa-solid fa-user"></i> PROFILE</a></li>
-            <li><a href="event.html"><i class="fa-solid fa-calendar"></i>EVENTS</a></li>
-            <li><a href="job.html"><i class="fa-solid fa-user-tie"></i>JOBS</a></li>
+            <li><a href="{%url 'staffhome'%}"><i class="fa-solid fa-house-user"></i> Home</a></li>
+            <li><a href="{%url 'profile'%}" class="active"><i class="fa-solid fa-user"></i> PROFILE</a></li>
+            <li><a href="{%url 'event'%}"><i class="fa-solid fa-calendar"></i>EVENTS</a></li>
+            <li><a href="{%url 'job'%}"><i class="fa-solid fa-user-tie"></i>JOBS</a></li>
           </ul>
         </div>
       </ul>
@@ -108,17 +110,18 @@ https://templatemo.com/tm-569-edu-meeting
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{%static 'jquery/jquery.min.js'%}"></script>
+  <script src="{%static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
 
-  <script src="assets/js/isotope.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/lightbox.js"></script>
-  <script src="assets/js/tabs.js"></script>
-  <script src="assets/js/isotope.js"></script>
-  <script src="assets/js/video.js"></script>
-  <script src="assets/js/slick-slider.js"></script>
-  <script src="assets/js/custom.js"></script>
+  <script src="{%static 'js/isotope.min.js'%}"></script>
+  <script src="{%static 'js/owl-carousel.js'%}"></script>
+  <script src="{%static 'js/lightbox.js'%}"></script>
+  <script src="{%static 'js/tabs.js'%}"></script>
+  
+  <script src="{%static 'js/video.js'%}"></script>
+  <script src="{%static 'js/slick-slider.js'%}"></script>
+  <script type="text/javascript" src="{%static 'js/custom.js'%}"></script>
+  <script src="{%static 'js/main.js'%}"></script>
 
 
   <script type="text/javascript">

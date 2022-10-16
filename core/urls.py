@@ -12,6 +12,13 @@ urlpatterns =[
     path('profile',views.profile,name='profile'),
     path('event',views.event,name='event'),
     path('logout',views.logout,name='logout'),
-    
+    path('verification',views.verification,name='verification'),
+    path('staffhome',views.staffhome,name='staffhome'),
+    path('staffprofile',views.staffprofile,name='staffprofile'),
+    path('eventcreate',views.eventcreate,name='eventcreate'),    
+    path('staffeventcreate',views.staffeventcreate,name='staffeventcreate'), 
+    path('staffevent',views.staffevent,name='staffevent'), 
+    path('staffjob',views.staffjob,name='staffjob'), 
+    path('staffcreatejob',views.staffcreatejob,name='staffcreatejob'), 
 
 ]

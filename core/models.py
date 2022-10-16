@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 
 # Create your models here.
@@ -10,5 +11,11 @@ class Userprofile(models.Model):
     course = models.TextField()
     role=models.TextField(default="STUDENT")
     verified=models.BooleanField(default=False)
+    rejected =models.BooleanField(default=False)
     def __str__(self):
         return self.email
+class Job(models.Model):
+    jobpost =models.TextField()
+    jobdesc=models.TextField()
+    def __str__(self):
+        return self.jobpost

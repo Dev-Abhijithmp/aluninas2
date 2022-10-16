@@ -32,29 +32,7 @@ https://templatemo.com/tm-569-edu-meeting
 
 -->
   <script type="text/javascript">
-    async function getJob() {
-
-      var didt = sessionStorage.getItem("depa");
-      var un = sessionStorage.getItem("name");
-      var jbpost = document.getElementById("jbpost");
-      var prnt = document.getElementById("prnt");
-
-      var job = {}
-
-      job = await $.get("/job/select", { "did": didt, "user": un }, function (data, status, xhr) {
-        return data;
-      }, "json");
-      alert(JSON.stringify(job));
-      var jb = []
-      var jb = job.output;
-      for (var key in jb) {
-        var end = " </P><input type=\"submit\" value=\"APPLY\"> </div> </div>";
-        prnt.innerHTML += "<div class=\"item\"> <div class=\"icon\"><img src=\"assets/images/service-icon-01.png\" alt=\"\"></div><div class=\"down-content\"><h4 >" + jb[key]["jobpost"] + "</h4>  <p >VENUE : COLLEGE AUDITORIUM</p><P >DATE : 22-07-2022 TIME : 11:00 AM</P><P >" + jb[key]["jobdescription"] + end;
-
-
-      }
-
-    }
+    
 
     //window.onload = getJob();
   </script>

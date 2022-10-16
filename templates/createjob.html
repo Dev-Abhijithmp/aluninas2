@@ -71,22 +71,19 @@ https://templatemo.com/tm-569-edu-meeting
               <div class="filters">
                 <div class="login">
                   <h1>JOB</h1>
-                  <form onsubmit="jobAction(this)" method="post">
+                  <form onsubmit="return jobAction(this)" method="post">
                     <label for="job post">
                       <i class="fa-solid fa-user-tie"></i>
                     </label>
-                    <input type="text" placeholder="job post" name="job name" id="jobpost" required>
+                    <input type="text" placeholder="jobpost" name="jobname" id="jobpost" required>
                     <label for="job description">
                       <i class="fa-sharp fa-solid fa-j"></i>
                     </label>
-                    <input type="text" placeholder="job description" name="job description" id="jobdescription"
+                    <input type="text" placeholder="jobdescription" name="jobdescription" id="jobdescription"
                       required><br><br>
                     <input type="submit" value="submit">
                   </form>
                   <br>
-                  <!-- <form onsubmit="jobViewAction(this)" method="get">
-                    <a href=joblist>JOBLIST</a>
-                  </form> -->
                 </div>
 
               </div>
@@ -108,7 +105,7 @@ https://templatemo.com/tm-569-edu-meeting
   <script src="{%static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
 
   <script src="{%static 'js/isotope.min.js'%}"></script>
-  <script src="a{%static 'owl-carousel.js'%}"></script>
+  <script src="{%static 'js/owl-carousel.js'%}"></script>
   <script src="{%static 'js/lightbox.js'%}"></script>
   <script src="{%static 'js/tabs.js'%}"></script>
   <script src="{%static 'js/isotope.js'%}"></script>
@@ -116,28 +113,21 @@ https://templatemo.com/tm-569-edu-meeting
   <script src="{%static 'js/slick-slider.js'%}"></script>
   <script src="{%static 'js/custom.js'%}"></script>
 
-  {% comment %} <script type="text/javascript">
-    async function jobAction(value) {
+   <script type="text/javascript">
+    async function jobAction() {
 
       var post = document.getElementById("jobpost").value;
       var description = document.getElementById("jobdescription").value;
       //alert(post + "::" + description);
-      var job = {}
-      job = await $.Post("/job", { "jobpost": post, "jobdescription": description }, function (data, status, xhr) {
-        alert("Data: " + data + "\nStatus: " + status);
-        return data;
-      }, "json");
-      alert(job);
-      if (job.status === "success") {
-        alert("success");
-        window.location = "/joblist.html";
-      }
-      else {
-        alert("fail");
-        window.location = "/job.html";
-      }
+     if(post==""||description==""){
+      window.alert('please fill all the data')
+      return false
+     }else{
+      return true
+     }
+      
     }
-  </script> {% endcomment %}
+  </script> 
   <script>
     //according to loftblog tut
     $('.nav li:first').addClass('active');

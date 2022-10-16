@@ -50,7 +50,7 @@ https://templatemo.com/tm-569-edu-meeting
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start *****-->
             <ul class="nav">
-              <li><a>LOGOUT</a></li>
+              <li><a href="{%url 'logout'%}">LOGOUT</a></li>
             </ul>
 
             <!-- ***** Menu End ***** -->
@@ -82,13 +82,21 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="col-lg-8">
               <form id="epf" onsubmit="updateAction()">
               </form>
-              <div class="filters">
+             
+              <div class="filters ">
+                <li id="name">Name :{{data.name}} </li><br><br>
+                <li id="name">Email : {{data.email}}</li><br><br>
+                <li id="name">Phone :{{data.phone}}</li><br><br>
+                <li id="name">Course :{{data.course}}</li><br><br>
+                <li id="name">Dob  : {{data.dob}}</li><br><br>
+                <li id="name">Gender :{{data.gender}}</li><br><br>
+                <li id="name">Role :{{data.role}}</li><br>
               </div>
-              <br><br><br><br><br><br><br><br><br><br>
+             
               <div class="col-lg-2"></div>
             </div>
             <div class="footer">
-              <!-- <p>last login date and time</p> -->
+             {% comment %} <p>last login date and time</p> {% endcomment %}
             </div>
           </div>
         </div>

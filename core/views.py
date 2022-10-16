@@ -1,7 +1,10 @@
+import email
 from django.shortcuts import render
+from django.core import serializers
+import json
 
 # Create your views here.
-from .models import  Userprofile
+from .models import  Userprofile,Job
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
@@ -10,10 +13,10 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
     print(request.user)
-    # if request.user.is_authenticated:
-    #     return redirect('home')
-    # else:
-    return render(request,'index.html')
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        return render(request,'index.html')
 def login(request):
     if request.method == 'POST':
         email = request.POST['username']
@@ -28,9 +31,19 @@ def login(request):
             print(user)
             if user is not None:
                 auth.login(request, user)
-                print(request.user)
-
-                return redirect('home')
+                data = Userprofile.objects.get(email=request.user.username)
+                print('username')
+                print(user.is_staff)
+                print(request.user.username)
+              
+                if data.verified==True:
+                    if user.is_staff:
+                        return redirect('staffhome')
+                    else: 
+                        return redirect('home')
+                else:
+                    return redirect('verification')
+                
             else:
                 messages.info(request, 'Invalid Credentials')
                 return render(request, 'login.html')
@@ -63,7 +76,7 @@ def register(request):
                     usern = auth.authenticate(username=email, password=pass1)
                     auth.login(request, usern)
                     profile =Userprofile.objects.create(name=name,email=email,phone=phone,gender=gender,dob=dob,course=course)
-                    return redirect('home')
+                    return redirect('verification')
             else:
                 messages.info(request, 'Password not matching')
                 return redirect('register')
@@ -75,20 +88,58 @@ def home(request):
     return render(request,'home.html')
 
 def staffhome(request):
-    return render(request,'staffhome.html')
+    data = Userprofile.objects.get(email=request.user.username)
+    context={
+        'data':data
+    }
+    return render(request,'staff/staffhome.html',context)
 @login_required(login_url='login')
 def job(request):
     return render(request,'job.html')
+def staffjob(request):
+    return render(request,'job.html')
+def staffcreatejob(request):
+    if request.method == 'POST':
+        jobpost = request.POST['jobpost']
+        jobdesc =request.POST['jobdesc']
+        Job.objects.create(jobdesc=jobdesc,jobpost=jobpost)
+    else:
+         return render(request,'createjob.html')
+
 def createjob(request):
-    return render(request,'createjob.html')
+    if request.method == 'POST':
+        jobpost = request.POST['jobpost']
+        jobdesc =request.POST['jobdesc']
+        Job.objects.create(jobdesc=jobdesc,jobpost=jobpost)
+    else:
+         return render(request,'createjob.html')
+@login_required(login_url='login')
 def profile(request):
-    return render(request,'profile.html')
+    data = Userprofile.objects.get(email=request.user.username)
+    context={
+        'data':data
+    }
+    return render(request,'profile.html',context)
+def staffprofile(request):
+    data = Userprofile.objects.get(email=request.user.username)
+    context={
+        'data':data
+    }
+    return render(request,'staff/staffprofile.html',context)
+def staffevent(request):
+    return render(request,'staff/staffevent.html')
+def staffeventcreate(request):
+    return render(request,'staff/eventcreate.html')
 
 def event(request):
     return render(request,'event.html')
-def createevent(request):
-    return render(request,'createevent.html')
+def eventcreate(request):
+    return render(request,'eventcreate.html')
 @login_required(login_url='login')
 def logout(request):
     auth.logout(request)
     return render(request, 'index.html')
+@login_required(login_url='login')
+def verification(request):
+    return render(request, 'verificationpage.html')
+
