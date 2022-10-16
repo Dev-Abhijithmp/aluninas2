@@ -14,11 +14,15 @@ urlpatterns =[
     path('logout',views.logout,name='logout'),
     path('verification',views.verification,name='verification'),
     path('staffhome',views.staffhome,name='staffhome'),
-    path('staffprofile',views.staffprofile,name='staffprofile'),
-    path('eventcreate',views.eventcreate,name='eventcreate'),    
+    path('staffprofile',views.staffprofile,name='staffprofile'),  
     path('staffeventcreate',views.staffeventcreate,name='staffeventcreate'), 
     path('staffevent',views.staffevent,name='staffevent'), 
     path('staffjob',views.staffjob,name='staffjob'), 
     path('staffcreatejob',views.staffcreatejob,name='staffcreatejob'), 
+    path('acceptuser/',views.acceptuser,name='acceptuser/'), 
+    path('rejectuser/',views.rejectuser,name='rejectuser/'), 
+    path('deletejob/',views.deletejob,name='deletejob/'), 
+    path('deleteevent/',views.deleteevent,name='deleteevent/'), 
+    
 
 ]

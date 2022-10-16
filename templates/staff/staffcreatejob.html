@@ -72,6 +72,7 @@ https://templatemo.com/tm-569-edu-meeting
                 <div class="login">
                   <h1>JOB</h1>
                   <form onsubmit="return jobAction(this)" method="post">
+                    {%csrf_token%}
                     <label for="job post">
                       <i class="fa-solid fa-user-tie"></i>
                     </label>

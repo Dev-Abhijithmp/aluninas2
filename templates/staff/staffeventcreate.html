@@ -72,26 +72,27 @@ https://templatemo.com/tm-569-edu-meeting
               <div class="filters">
                 <div class="login">
                   <h1>EVENT</h1>
-                  <form onsubmit="eventAction(this)" method="post">
+                  <form onsubmit="return eventAction(this)" method="post">
+                    {%csrf_token%}
                     <label for="event name">
                       <i class="fa-solid fa-e"></i>
                     </label>
-                    <input type="text" placeholder="event name" name="event name" id="eventname" required>
+                    <input type="text" placeholder="event name" name="eventname" id="eventname" required>
 
                     <label for="event date">
                       <i class="fa-solid fa-calendar-days"></i>
                     </label>
-                    <input type="date" placeholder="event date" name="event date" id="eventdate" required>
+                    <input type="date" placeholder="event date" name="eventdate" id="eventdate" required>
 
                     <label for="event venue">
                       <i class="fa-solid fa-globe"></i>
                     </label>
-                    <input type="text" placeholder="event venue" name="event venue" id="eventvenue" required>
+                    <input type="text" placeholder="event venue" name="eventvenue" id="eventvenue" required>
 
-                    <label for="event time">
+                    <label for="eventtime">
                       <i class="fa-solid fa-clock"></i>
                     </label>
-                    <input type="text" placeholder="event time" name="event time" id="eventtime" required>
+                    <input type="text" placeholder="event time" name="eventtime" id="eventtime" required>
                     <input type="submit" value="submit">
                   </form>
                   <!-- <a href=eventlist>EVENTLSTS</a> -->
@@ -131,20 +132,12 @@ https://templatemo.com/tm-569-edu-meeting
       var venu = document.getElementById("eventvenue").value;
       var evttm = document.getElementById("eventtime").value;
       // alert(evtn + "::" + evtdt + "::" + venu + "::" + evttm);
-      var evet = {}
-      evet = await $.Post("/event", { "eventname": evtn, "eventdate": evtdt, "eventvenue": venu, "eventtime": evttm }, function (data, status, xhr) {
-        alert("Data: " + data + "\nStatus: " + status);
-        return data;
-      }, "json");
-      alert(evet);
-      if (evet.status === "success") {
-        alert("success");
-        window.location = "/";
-      }
-      else {
-        alert("fail");
-        window.location = "/event.html";
-      }
+     if(evtn==""||evtdt==""||venu==""||evttm==""){
+        window.alert("pleasec fill all the fields")
+        return false
+     }else{
+        return true
+     }
     }
   </script>
   <script>

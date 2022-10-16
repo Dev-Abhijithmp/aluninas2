@@ -4,7 +4,7 @@ from django.core import serializers
 import json
 
 # Create your views here.
-from .models import  Userprofile,Job
+from .models import  Userprofile,Job,Event
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
@@ -14,6 +14,8 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     print(request.user)
     if request.user.is_authenticated:
+        print('user')
+        print(request.user.is_staff)
         return redirect('home')
     else:
         return render(request,'index.html')
@@ -89,30 +91,68 @@ def home(request):
 
 def staffhome(request):
     data = Userprofile.objects.get(email=request.user.username)
+    users = Userprofile.objects.filter(is_staff=False,is_superuser=False,verified=False,rejected=False,)
     context={
-        'data':data
+        'data':data,
+        'users':users
     }
     return render(request,'staff/staffhome.html',context)
+def acceptuser(request,):
+    val =request.GET['email']
+    print(val)
+    data = Userprofile.objects.get(email=val)
+    data.verified=True
+    data.save()
+    return redirect('staffhome')
+def rejectuser(request):
+    val =request.GET['email']
+    print(val)
+    data = Userprofile.objects.get(email=val)
+    data.rejected=True
+    data.save()
+    return redirect('staffhome')
+def deletejob(request):
+    val =request.GET['id']
+    print(val)
+    data = Job.objects.get(id=val)
+    data.delete()
+    
+    return redirect('staffjob')
+def deleteevent(request):
+    val =request.GET['id']
+    print(val)
+    data = Event.objects.get(id=val)
+    data.delete()
+    return redirect('staffevent')
 @login_required(login_url='login')
 def job(request):
     return render(request,'job.html')
+@login_required(login_url='login')
 def staffjob(request):
-    return render(request,'job.html')
+    job=Job.objects.all()
+    context={
+        'job':job
+    }
+    
+    return render(request,'staff/staffjob.html',context)
+@login_required(login_url='login')
 def staffcreatejob(request):
     if request.method == 'POST':
-        jobpost = request.POST['jobpost']
-        jobdesc =request.POST['jobdesc']
+        jobpost = request.POST['jobname']
+        jobdesc =request.POST['jobdescription']
         Job.objects.create(jobdesc=jobdesc,jobpost=jobpost)
-    else:
-         return render(request,'createjob.html')
+        return redirect('staffjob')
 
+    return render(request,'staff/staffcreatejob.html')
+
+@login_required(login_url='login')
 def createjob(request):
     if request.method == 'POST':
-        jobpost = request.POST['jobpost']
-        jobdesc =request.POST['jobdesc']
+        jobpost = request.POST['jobname']
+        jobdesc =request.POST['jobdescription']
         Job.objects.create(jobdesc=jobdesc,jobpost=jobpost)
-    else:
-         return render(request,'createjob.html')
+    
+        return redirect('job')
 @login_required(login_url='login')
 def profile(request):
     data = Userprofile.objects.get(email=request.user.username)
@@ -120,6 +160,8 @@ def profile(request):
         'data':data
     }
     return render(request,'profile.html',context)
+
+@login_required(login_url='login')
 def staffprofile(request):
     data = Userprofile.objects.get(email=request.user.username)
     context={
@@ -127,14 +169,25 @@ def staffprofile(request):
     }
     return render(request,'staff/staffprofile.html',context)
 def staffevent(request):
-    return render(request,'staff/staffevent.html')
+    event = Event.objects.all()
+    context= {
+        'event':event
+    }
+    return render(request,'staff/staffevent.html',context)
 def staffeventcreate(request):
-    return render(request,'staff/eventcreate.html')
+    if request.method=='POST':
+        name =request.POST.get('eventname')
+        date =request.POST.get('eventdate')
+        venue =request.POST.get('eventvenue')
+        time =request.POST.get('eventtime')
+        ob=Event.objects.create(name=name,venue=venue,date=date,eventtime=time)
+        return redirect('staffevent')
+
+
+    return redirect('staffeventcreate')
 
 def event(request):
     return render(request,'event.html')
-def eventcreate(request):
-    return render(request,'eventcreate.html')
 @login_required(login_url='login')
 def logout(request):
     auth.logout(request)
