@@ -71,7 +71,6 @@ https://templatemo.com/tm-569-edu-meeting
           <li class='w-25'><a href="{%url 'staffeventcreate'%}"><i class="fa-solid"></i>CREATEEVENTS</a></li><br>
           <li class='w-25'><a href="{%url 'staffjob'%}"><i class="fa-solid fa-user-tie"></i>JOBS</a></li>
           <li class='w-25'><a href="{%url 'staffcreatejob'%}"><i class="fa-solid"></i>CREATEJOB</a></li>
-          <li class='w-25'><a href="{%url 'participants'%}"><i class="fa-solid"></i>PARTICIPANT</a></li>
         </ul>
       </div>
       <div class="row">
@@ -85,9 +84,7 @@ https://templatemo.com/tm-569-edu-meeting
                 
               </div>
               <br><br><br><br>
-              {% for  i in users %}
-              {% if i.role == 'STAFF' %}
-              {%else%}
+              {% for  i in participants %}
               <div class="card w-50 p-3 m-5 justify-content-center">
                
                 <form method='post'>
@@ -98,8 +95,7 @@ https://templatemo.com/tm-569-edu-meeting
                   <p class="card-text">Course : {{i.course}}</p>
                   <p class="card-text">Phone  : {{i.phone}}</p>
                   <p class="card-text">Role  :{{i.role}}</p>
-                  <a href="acceptuser/?email={{i.email}}" class="btn btn-primary">Accept</a>
-                  <a href="rejectuser/?email={{i.email}}" class="btn btn-primary">Reject</a>
+                
                 </div>
                 <br>
               </form>

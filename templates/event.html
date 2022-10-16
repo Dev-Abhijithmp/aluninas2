@@ -10,7 +10,7 @@
   <meta name="author" content="Template Mo">
   <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
-  <title>Event</title>
+  <title>jobs</title>
 
   <!-- Bootstrap core CSS -->
   <link href="{%static 'bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
@@ -21,13 +21,21 @@
   <link rel="stylesheet" href="{%static 'css/templatemo-edu-meeting.css'%}">
   <link rel="stylesheet" href="{%static 'css/owl.css'%}">
   <link rel="stylesheet" href="{%static 'css/lightbox.css'%}">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
-  <link href="/style.css" rel="stylesheet" type="text/css">
+  <!-- <link href="/style.css" rel="stylesheet" type="text/css"> -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
   <link href="{%static 'css/loginStyle.css'%}" rel="stylesheet" type="text/css">
-  
+  <!--
 
- 
+TemplateMo 569 Edu Meeting
+
+https://templatemo.com/tm-569-edu-meeting
+
+-->
+  <script type="text/javascript">
+    
+
+    //window.onload = getJob();
+  </script>
 </head>
 
 <body >
@@ -45,7 +53,7 @@
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
-              <li><a >LOGOUT</a></li>
+              <li><a href="{%url 'logout'%}" >LOGOUT</a></li>
             </ul>
 
             <!-- ***** Menu End ***** -->
@@ -73,32 +81,78 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="row">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-9">
-              <!-- <form id="event">
-              </form> -->
+            <div class="col-lg-2"></div>
+            
+            <div class="col-lg-8">
+              <br><br><br><br>
               <section class="services">
                 <div class="container">
                   <div class="row">
                     <div class="col-lg-8">
-                      <div id="evtprt" class="owl-service-item owl-carousel">
+                      <div id="prnt" class="owl-service-item owl-carousel">
+                        {% for i in event %}
+                        
+
+                        <div id="cln" class="item">
+                          <div class="icon">
+                            <img src="{%static 'images/service-icon-01.png'%}" alt="">
+                          </div>
+                          <div class="down-content">
+                            <h4 id="name" name='name'>{{i.name}}</h4>
+                            <p id="venue" name='venue'>VENUE : {{i.venue}}</p>
+                            <P id="date">DATE : {{i.date}} </P>
+                            <P id="time">TIME : {{i.eventtime}} </P>
+
+                            <P id="sec">ALL STUDENTS CAN PARTICIPATE </P>
+                            <a href="applyevent/?id={{i.id}}"><input type="submit" value="Apply"></a>
+                          </div>
+                        </div>
+                      
+                        {% endfor %}
+                        
+                          
+                          
+
+
                       </div>
-                      </div>
+                    </div>
                   </div>
                 </div>
-                </section>
+              </section>
+
+
+
+
+             {% comment %} <div class="col-lg-12">
+                  <div class="owl-service-item owl-carousel" style=" background-color: #a12c2f;
+                  color: #fff;">>
+        
+                    <div class="item">
+                      <div class="icon">
+                        <img src="assets/images/service-icon-01.png" alt="">
+                      </div>
+                      <div class="down-content" size ="20px">
+                        <h6>YOUTH FESTIVAL</h6>
+                        <p>VENUE : COLLEGE AUDITORIUM</p>
+                        <P>DATE : 22-07-2022 TIME : 11:00 AM</P>
+                        <P>ALL STUDENTS CAN PARTICIPATE </P>
+                        
+                      </div>
+               </div>  {% endcomment %}
+
+
+
               <div class="filters">
               </div>
               <br><br><br><br><br><br><br><br><br><br>
             </div>
-            <div class="col-lg-1"></div>
             <div class="footer">
               <!-- <p>last login date and time</p> -->
             </div>
           </div>
         </div>
       </div>
-
+    </div>
   </section>
 
 
@@ -116,7 +170,6 @@
   <script src="{%static 'js/slick-slider.js'%}"></script>
   <script type="text/javascript" src="{%static 'js/custom.js'%}"></script>
   <script src="{%static 'js/main.js'%}"></script>
-
 
 
   <script>

@@ -28,3 +28,12 @@ class Event(models.Model):
     eventtime=models.TextField()
     def __str__(self):
         return self.name
+class Participants(models.Model):
+    name =models.TextField(null=True,blank=True)
+    email=models.TextField()
+    eventid =models.TextField(null=True,blank=True)
+    date=models.DateField()
+    venue=models.TextField()
+    eventtime=models.TextField()
+    def __str__(self):
+        return self.name

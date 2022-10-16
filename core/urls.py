@@ -22,7 +22,10 @@ urlpatterns =[
     path('acceptuser/',views.acceptuser,name='acceptuser/'), 
     path('rejectuser/',views.rejectuser,name='rejectuser/'), 
     path('deletejob/',views.deletejob,name='deletejob/'), 
-    path('deleteevent/',views.deleteevent,name='deleteevent/'), 
+    path('deleteevent/',views.deleteevent,name='deleteevent/'),
+    path('parcipants',views.participants,name='participants'),
+     
+    path('applyevent/',views.applyevent,name='applyevent/'), 
     
 
 ]

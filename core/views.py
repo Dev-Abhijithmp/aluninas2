@@ -1,10 +1,11 @@
 import email
+from unicodedata import name
 from django.shortcuts import render
 from django.core import serializers
 import json
 
 # Create your views here.
-from .models import  Userprofile,Job,Event
+from .models import  Participants, Userprofile,Job,Event,Participants
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
@@ -87,7 +88,12 @@ def register(request):
         return render(request, 'registration.html')        
 @login_required(login_url='login')
 def home(request):
-    return render(request,'home.html')
+    data = Userprofile.objects.get(email=request.user.username)
+    context={
+        'data':data,
+      
+    }
+    return render(request,'home.html',context)
 
 def staffhome(request):
     data = Userprofile.objects.get(email=request.user.username)
@@ -126,7 +132,11 @@ def deleteevent(request):
     return redirect('staffevent')
 @login_required(login_url='login')
 def job(request):
-    return render(request,'job.html')
+    job=Job.objects.all()
+    context={
+        'job':job
+    }
+    return render(request,'job.html',context)
 @login_required(login_url='login')
 def staffjob(request):
     job=Job.objects.all()
@@ -174,6 +184,7 @@ def staffevent(request):
         'event':event
     }
     return render(request,'staff/staffevent.html',context)
+@login_required(login_url='login')
 def staffeventcreate(request):
     if request.method=='POST':
         name =request.POST.get('eventname')
@@ -182,12 +193,32 @@ def staffeventcreate(request):
         time =request.POST.get('eventtime')
         ob=Event.objects.create(name=name,venue=venue,date=date,eventtime=time)
         return redirect('staffevent')
-
-
-    return redirect('staffeventcreate')
-
+    return render(request,'staff/staffeventcreate.html')
 def event(request):
-    return render(request,'event.html')
+    if request.method=='POST':
+        name =request.POST.get('name')
+        venue =request.POST.get('venue')
+        date =request.POST.get('date')
+        time =request.POST.get('time')
+        ids =request.POST.get('id')
+        obj =Participants.objects.create(name=name,venue=venue,date=date,eventtime=time,eventid=ids,email=request.user.username)
+        event = Event.objects.all()
+        context= {
+            'event':event
+        }
+        return render(request,'event.html',context)
+    else:
+        event = Event.objects.all()
+        context= {
+            'event':event
+        }
+        return render(request,'event.html',context)
+def participants(request):
+    p = Participants.objects.all()
+    context= {
+        'participants':p
+    }
+    return render(request,'staff/participants.html',context)
 @login_required(login_url='login')
 def logout(request):
     auth.logout(request)
@@ -195,4 +226,9 @@ def logout(request):
 @login_required(login_url='login')
 def verification(request):
     return render(request, 'verificationpage.html')
+def applyevent(request):
+    ids=request.GET['id']
+    ev = Event.objects.get(id=ids)
+    par =Participants.objects.create(email=request.user.username,name=ev.name,eventid=ids,date=ev.date,venue=ev.venue)
+    return redirect('event')
 
