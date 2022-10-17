@@ -222,7 +222,7 @@ def participants(request):
     context= {
         'participants':p
     }
-    return render(request,'staff/participants.html',context)
+    return render(request,'staff/participant.html',context)
 @login_required(login_url='login')
 def logout(request):
     auth.logout(request)
@@ -233,6 +233,6 @@ def verification(request):
 def applyevent(request):
     ids=request.GET['id']
     ev = Event.objects.get(id=ids)
-    par =Participants.objects.create(email=request.user.username,name=ev.name,eventid=ids,date=ev.date,venue=ev.venue)
+    Participants.objects.create(email=request.user.username,name=str(ev.name),eventid=ids,date=str(ev.date),venue=str(ev.venue),eventtime=str(ev.eventtime))
     return redirect('event')
 

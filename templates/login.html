@@ -92,6 +92,10 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="row">
         <div class="col-lg-12">
           <div class="row">
+            {% for message in messages%}
+            <span class='alert'>  <h1 class ="alerthead">Error !</h1> <h2 class="alertcontent">{{message}}</h2><span>
+              {% endfor %}
+              <br>
             <div class="col-lg-12">
               <div class="login">
                 <h1>Login</h1>
