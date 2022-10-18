@@ -67,14 +67,14 @@ def register(request):
         dob =request.POST['dob']
         course =request.POST['course']
         gender =request.POST['gender']
-        if pass1 == "" or pass2 == ""or email == "":
+        if pass1 == "" or pass2 == ""or email == "" or email ==""or gender == "" or name =='' :
             messages.info(request, 'please fill all the fields')
-            return redirect('register')
+            return render(request, 'registration.html')
         else:
             if pass1 == pass2:
                 if User.objects.filter(email=email).exists():
                     messages.info(request, 'Email Taken')
-                    return redirect('register')
+                    return render(request, 'registration.html')
                 else:
 
                     user = User.objects.create_user(
@@ -86,7 +86,7 @@ def register(request):
                     return redirect('verification')
             else:
                 messages.info(request, 'Password not matching')
-                return redirect('register')
+                return render(request, 'registration.html')
 
     else:
         return render(request, 'registration.html')        

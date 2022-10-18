@@ -32,7 +32,7 @@ https://templatemo.com/tm-569-edu-meeting
 
 -->
   <script type="text/javascript">
-    async function registerAction(val) {
+     function registerAction() {
       var name = document.getElementById("name").value
       var pass = document.getElementById("pass").value
       var email = document.getElementById("email").value;
@@ -40,6 +40,7 @@ https://templatemo.com/tm-569-edu-meeting
       var dob = document.getElementById("dob").value
       var radios = document.getElementsByName("gender")
       var course =document.getElementById("course").value
+      var letters = /^[A-Za-z]+$/
       var gend =0 ;
       for (var radio of radios) {
         if (radio.checked) {
@@ -48,10 +49,20 @@ https://templatemo.com/tm-569-edu-meeting
       };
 
       if(name==''||pass==""||email==""||phone==""||dob==""||gend==0||course==""){
-        window.alert("enter all data")
+        alert("enter all data")
         return false
+        
+        
+        
       }else{
-        return true
+        if(name.match(letters)){
+          return true
+        }else{
+          alert("enter valid name")
+          return false
+
+        }
+        
 
       }
     }
@@ -101,7 +112,7 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="col-lg-12">
               <div class="login">
                 <h1>REGISTER</h1>
-                <form onsubmit="return registerAction(this)" method="post" target="_self">
+                <form onsubmit="return registerAction()" method="post" target="_self">
                   {% csrf_token %}
                   <label for="name">
                     <!-- font awesome icon -->
