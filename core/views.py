@@ -1,3 +1,4 @@
+from ast import For
 import email
 from unicodedata import name
 from django.shortcuts import render
@@ -10,6 +11,11 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
 from django.contrib.auth.decorators import login_required
+from django.template.defaulttags import register
+...
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
 
 # Create your views here.
 def index(request):
@@ -205,18 +211,53 @@ def event(request):
         date =request.POST.get('date')
         time =request.POST.get('time')
         ids =request.POST.get('id')
-        obj =Participants.objects.create(name=name,venue=venue,date=date,eventtime=time,eventid=ids,email=request.user.username)
+        Participants.objects.create(name=name,venue=venue,date=date,eventtime=time,eventid=ids,email=request.user.username)
         event = Event.objects.all()
+        
+
         context= {
             'event':event
         }
         return render(request,'event.html',context)
     else:
         event = Event.objects.all()
-        context= {
-            'event':event
-        }
-        return render(request,'event.html',context)
+        obj =Participants.objects.filter(email=request.user.username)
+        print(obj)
+        tmpjson = serializers.serialize('json', obj)
+        m = json.loads(tmpjson)
+        print(m)
+        
+        if obj.exists():
+            v ={}
+            for i in event:
+                flag =0
+                for j in m:
+
+                    if str(i.id) ==j['fields']['eventid']:
+                        print(j['fields']['eventid'])
+                        flag =1
+                if flag == 1:
+                    v[i.id]='Applied'
+                else:
+                    v[i.id]='Notapplied'
+
+            print(v)       
+            context= {
+            'event':event,
+            'data':v,
+            }
+            return render(request,'event.html',context)
+            
+        else:
+            context= {
+            'event':event,
+            'data':'null',
+            }
+            return render(request,'event.html',context)
+            
+
+        
+        
 def participants(request):
     p = Participants.objects.all()
     context= {

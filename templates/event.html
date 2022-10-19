@@ -104,7 +104,24 @@ https://templatemo.com/tm-569-edu-meeting
                             <P id="time">TIME : {{i.eventtime}} </P>
 
                             <P id="sec">ALL STUDENTS CAN PARTICIPATE </P>
-                            <a href="applyevent/?id={{i.id}}"><input type="submit" value="Apply"></a>
+    
+                           
+                            {% if  data|get_item:i.id  == "Applied" %}
+                            <i>Applied</i>
+                           
+                           {% else %}
+                           
+
+                           <a href="applyevent/?id={{i.id}}"><input type="submit" value="Apply"></a>
+                           {% endif %} 
+                            
+                              
+                              
+
+                            
+
+                            
+                            
                           </div>
                         </div>
                       
