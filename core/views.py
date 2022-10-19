@@ -73,6 +73,7 @@ def register(request):
         dob =request.POST['dob']
         course =request.POST['course']
         gender =request.POST['gender']
+        role =request.POST['role']
         if pass1 == "" or pass2 == ""or email == "" or email ==""or gender == "" or name =='' :
             messages.info(request, 'please fill all the fields')
             return render(request, 'registration.html')
@@ -88,7 +89,7 @@ def register(request):
                     user.save()
                     usern = auth.authenticate(username=email, password=pass1)
                     auth.login(request, usern)
-                    profile =Userprofile.objects.create(name=name,email=email,phone=phone,gender=gender,dob=dob,course=course)
+                    profile =Userprofile.objects.create(name=name,email=email,phone=phone,gender=gender,dob=dob,course=course,role=role)
                     return redirect('verification')
             else:
                 messages.info(request, 'Password not matching')
@@ -100,8 +101,7 @@ def register(request):
 def home(request):
     data = Userprofile.objects.get(email=request.user.username)
     context={
-        'data':data,
-      
+        'data':data,   
     }
     return render(request,'home.html',context)
 
@@ -201,7 +201,8 @@ def staffeventcreate(request):
         date =request.POST.get('eventdate')
         venue =request.POST.get('eventvenue')
         time =request.POST.get('eventtime')
-        ob=Event.objects.create(name=name,venue=venue,date=date,eventtime=time)
+        role =request.POST.get('role')
+        ob=Event.objects.create(name=name,venue=venue,date=date,eventtime=time,role=role)
         return redirect('staffevent')
     return render(request,'staff/staffeventcreate.html')
 def event(request):
@@ -220,7 +221,12 @@ def event(request):
         }
         return render(request,'event.html',context)
     else:
+        udata =Userprofile.objects.get(email=request.user.username)
         event = Event.objects.all()
+        if udata.role == 'ALUMNI':
+            event = Event.objects.filter(role ='ALL')
+            print(udata.role)
+        
         obj =Participants.objects.filter(email=request.user.username)
         print(obj)
         tmpjson = serializers.serialize('json', obj)

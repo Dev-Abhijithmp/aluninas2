@@ -26,6 +26,7 @@ class Event(models.Model):
     date=models.DateField()
     venue=models.TextField()
     eventtime=models.TextField()
+    role =models.TextField(blank=True)
     def __str__(self):
         return self.name
 class Participants(models.Model):

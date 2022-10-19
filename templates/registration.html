@@ -41,6 +41,7 @@ https://templatemo.com/tm-569-edu-meeting
       var radios = document.getElementsByName("gender")
       var course =document.getElementById("course").value
       var letters = /^[A-Za-z]+$/
+      var nameRegex = /^(?!-)(?!.*-$)[a-zA-Z-]+$/
       var gend =0 ;
       for (var radio of radios) {
         if (radio.checked) {
@@ -55,16 +56,35 @@ https://templatemo.com/tm-569-edu-meeting
         
         
       }else{
-        if(name.match(letters)){
-          return true
-        }else{
+        if(nameRegex.match(name)){
           alert("enter valid name")
           return false
+        }else{
+          
+          var now = new Date();
+         //Validate birth date some time before today's date and
+        //within 120 years
+          if(dob== null || 
+          (dob < now && now.getFullYear() - dob.getFullYear() < 13)){
+            print("in date1")
+           return true;
+          } else{
+            print('in date 2')
+          return false;
+            }
+          
+          
+          
 
         }
         
 
       }
+    }
+    function validatedate(){
+     
+
+      
     }
 
   </script>
@@ -144,7 +164,7 @@ https://templatemo.com/tm-569-edu-meeting
                   <select id="role" name="role">
                     <option value="STUDENT" selected>STUDENT</option>
                     <option value="ALUMNI">ALUMNI</option> 
-                    <option value="ALUMNI">STAFF</option>
+                    <option value="STAFF">STAFF</option>
                   </select>
                  
                   <label for="email">
