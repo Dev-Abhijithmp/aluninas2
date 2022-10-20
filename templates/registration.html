@@ -31,63 +31,6 @@ TemplateMo 569 Edu Meeting
 https://templatemo.com/tm-569-edu-meeting
 
 -->
-  <script type="text/javascript">
-     function registerAction() {
-      var name = document.getElementById("name").value
-      var pass = document.getElementById("pass").value
-      var email = document.getElementById("email").value;
-      var phone = document.getElementById("phone").value
-      var dob = document.getElementById("dob").value
-      var radios = document.getElementsByName("gender")
-      var course =document.getElementById("course").value
-      var letters = /^[A-Za-z]+$/
-      var nameRegex = /^(?!-)(?!.*-$)[a-zA-Z-]+$/
-      var gend =0 ;
-      for (var radio of radios) {
-        if (radio.checked) {
-          gend = 1
-        }
-      };
-
-      if(name==''||pass==""||email==""||phone==""||dob==""||gend==0||course==""){
-        alert("enter all data")
-        return false
-        
-        
-        
-      }else{
-        if(nameRegex.match(name)){
-          alert("enter valid name")
-          return false
-        }else{
-          
-          var now = new Date();
-         //Validate birth date some time before today's date and
-        //within 120 years
-          if(dob== null || 
-          (dob < now && now.getFullYear() - dob.getFullYear() < 13)){
-            print("in date1")
-           return true;
-          } else{
-            print('in date 2')
-          return false;
-            }
-          
-          
-          
-
-        }
-        
-
-      }
-    }
-    function validatedate(){
-     
-
-      
-    }
-
-  </script>
 
 </head>
 
@@ -132,7 +75,7 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="col-lg-12">
               <div class="login">
                 <h1>REGISTER</h1>
-                <form onsubmit="return registerAction()" method="post" target="_self">
+                <form onsubmit="return registerAction(this)" method="post" target="_self">
                   {% csrf_token %}
                   <label for="name">
                     <!-- font awesome icon -->
@@ -282,6 +225,7 @@ https://templatemo.com/tm-569-edu-meeting
       checkSection();
     });
   </script>
+  <script src="{%static 'js/rj.js'%}"></script>
 </body>
 
 </html>
